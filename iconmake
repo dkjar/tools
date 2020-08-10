@@ -1,0 +1,165 @@
+#! /bin/sh
+
+if [ -z "$1" ]; then
+	echo 'please input u want to pack ipa...'
+	exit
+fi
+
+if [ -z "$2" ]; then
+	echo 'please input app logo dir...'
+	exit
+fi
+
+sourcedir=$1  #png
+dir_str=$2
+
+cd $dir_str
+
+sips -Z 1024 $1 --out logo.png
+sips -Z 40 logo.png --out iphone-notification@2x.png
+sips -Z 60 logo.png --out iphone-notification@3x.png
+
+sips -Z 58 logo.png --out iphone-settings@2x.png
+sips -Z 87 logo.png --out iphone-settings@3x.png
+
+sips -Z 80 logo.png --out iphone-spotlight@2x.png
+sips -Z 120 logo.png --out iphone-spotlight@3x.png
+
+sips -Z 120 logo.png --out iphone-app@2x.png
+sips -Z 180 logo.png --out iphone-app@3x.png
+
+sips -Z 20 logo.png --out ipad-notifications@1x.png
+sips -Z 40 logo.png --out ipad-notifications@2x.png
+
+sips -Z 29 logo.png --out ipad-settings@1x.png
+sips -Z 58 logo.png --out ipad-settings@2x.png
+
+sips -Z 40 logo.png --out ipad-spotlight@1x.png
+sips -Z 80 logo.png --out ipad-spotlight@2x.png
+
+sips -Z 76 logo.png --out ipad-app@1x.png
+sips -Z 152 logo.png --out ipad-app@2x.png
+
+sips -Z 167 logo.png --out ipad-pro@2x.png
+
+
+echo '{
+  "images" : [
+    {
+      "filename" : "iphone-notification@2x.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "iphone-notification@3x.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "iphone-settings@2x.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "iphone-settings@3x.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "iphone-spotlight@2x.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "iphone-spotlight@3x.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "iphone-app@2x.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "60x60"
+    },
+    {
+      "filename" : "iphone-app@3x.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "60x60"
+    },
+    {
+      "filename" : "ipad-notifications@1x.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "ipad-notifications@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "ipad-settings@1x.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "ipad-settings@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "ipad-spotlight@1x.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "ipad-spotlight@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "ipad-app@1x.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "76x76"
+    },
+    {
+      "filename" : "ipad-app@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "76x76"
+    },
+    {
+      "filename" : "ipad-pro@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "83.5x83.5"
+    },
+    {
+      "filename" : "logo.png",
+      "idiom" : "ios-marketing",
+      "scale" : "1x",
+      "size" : "1024x1024"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
+' > Contents.json
+
+
+echo "logo make sucess ^_^"
